@@ -1,4 +1,4 @@
-# Counting vowels: WAP for counting number of times the string 'bob' appears in string s
+# Counting bob: WAP for counting number of times the string 'bob' appears in string s
 # Test values for variable 's' is provided by edX  
 # 
 # Example: s = 'azcbobobegghakl'
