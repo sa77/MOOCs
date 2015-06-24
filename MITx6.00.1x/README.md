@@ -6,5 +6,9 @@ Solutions to MITx:6.00.1x
   * P2: Counting bobs
   * P3: Alphabetical Substrings
 
+##### PSET2
+  * P1: Credit debt: minimum payment/remaining balance
+  * P2: Credit debt: paying debt in a year 
+  * P3: Credit debt: paying debt (bisection search)
   
 
