@@ -1,19 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="description" content="html_5canvas">
+  <meta name="description" content="html5_canvas">
   <meta charset="utf-8">
   <title>HTML5 Canvas</title>
   <style>
-    canvas{
-      border: 1px solid;
+    body{
+      font-style: italic;
+    }
+    main{
+      width: 1000px;
+      margin: auto;
+    }
+    #project1{
+      float: left;
+    }
+    h1{ 
+      text-align: center;
+    }
+    canvas{ 
+      border: 1px solid; 
     }
   </style>
 </head>
 <body onload='init();'>
-  <canvas id='myCanvas' width='400' height='400'>
-    Unfortunately, Canvas is not supported by your browser
-  </canvas>
+  <main>
+    <h1>HTML5 &lt;canvas&gt;</h1>
+    <section>
+      <article id='project1'>
+        <h2>simple graphics using basic shapes</h2>
+        <canvas id='myCanvas' width='400' height='200'>
+          Unfortunately, Canvas is not supported by your browser
+        </canvas>
+      </article>
+
+    </section>
+  </main>
+
   <script>
   function init(){
     canvas = document.querySelector('#myCanvas');
@@ -23,13 +46,13 @@
 
   function drawCar(color){
     ctx.save();
-    ctx.translate(100,100);
+    ctx.translate(100,50);
     
     //draw body
     ctx.fillStyle = color;
-    ctx.fillRect(0,0,150,60);
-    ctx.fillRect(0,60,-30,-30);
-    ctx.fillRect(150,60,40,-30);
+    ctx.fillRect(0, 0, 150, 60);
+    ctx.fillRect(0, 60, -30, -30);
+    ctx.fillRect(150, 60, 40, -30);
     
     //draw windows
     ctx.strokeStyle = '#000';
