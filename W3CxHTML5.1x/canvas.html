@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="description" content="html_5canvas">
+  <meta charset="utf-8">
+  <title>HTML5 Canvas</title>
+  <style>
+    canvas{
+      border: 1px solid;
+    }
+  </style>
+</head>
+<body onload='init();'>
+  <canvas id='myCanvas' width='400' height='400'>
+    Unfortunately, Canvas is not supported by your browser
+  </canvas>
+  <script>
+  function init(){
+    canvas = document.querySelector('#myCanvas');
+    ctx = canvas.getContext('2d');
+    drawCar('red');
+  }
+
+  function drawCar(color){
+    ctx.save();
+    ctx.translate(100,100);
+    
+    //draw body
+    ctx.fillStyle = color;
+    ctx.fillRect(0,0,150,60);
+    ctx.fillRect(0,60,-30,-30);
+    ctx.fillRect(150,60,40,-30);
+    
+    //draw windows
+    ctx.strokeStyle = '#000';
+    ctx.strokeRect(20, 10, 20, 15);
+    ctx.strokeRect(40, 10, 20, 15);
+    ctx.strokeRect(80, 10, 20, 15);
+    ctx.strokeRect(100, 10, 20, 15);
+    
+    //draw wheels
+    ctx.fillStyle = '#FFF';
+    ctx.arc(30, 60, 2, 0, 2 * Math.PI, false);
+    ctx.arc(120, 60, 2, 0, 2 * Math.PI, false);
+    ctx.fill();
+    ctx.fillStyle = '#000';
+    ctx.arc(30, 60, 15, 0, 2 * Math.PI, true);
+    ctx.arc(120, 60, 15, 0, 2 * Math.PI, true);
+    ctx.fill();
+    
+    //caption
+    ctx.font = 'italic 12pt calibri';
+    ctx.fillText('Car', 60, 120);
+    ctx.restore();
+  }
+  </script>
+</body>
+</html>
+
+
