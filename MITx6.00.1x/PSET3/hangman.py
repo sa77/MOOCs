@@ -42,9 +42,6 @@ def chooseWord(wordlist):
 # end of helper code
 # -----------------------------------
 
-# Load the list of words into the variable wordlist
-# so that it can be accessed from anywhere in the program
-wordlist = loadWords()
 
 def isWordGuessed(secretWord, lettersGuessed):
     '''
@@ -53,7 +50,15 @@ def isWordGuessed(secretWord, lettersGuessed):
     returns: boolean, True if all the letters of secretWord are in lettersGuessed;
       False otherwise
     '''
-    # FILL IN YOUR CODE HERE...
+    temp = list("".join(set(secretWord)))
+    wordlen = len(temp)
+    count = 0 
+    for letter in lettersGuessed:
+        if letter in temp:
+            count += 1
+    if count == wordlen:
+        return True
+    return False            
 
 
 
@@ -64,8 +69,13 @@ def getGuessedWord(secretWord, lettersGuessed):
     returns: string, comprised of letters and underscores that represents
       what letters in secretWord have been guessed so far.
     '''
-    # FILL IN YOUR CODE HERE...
-
+    current_word = ''
+    for c in secretWord:
+        if c in lettersGuessed:
+            current_word += c 
+        else:
+            current_word += '_ '            
+    return current_word
 
 
 def getAvailableLetters(lettersGuessed):
@@ -74,8 +84,38 @@ def getAvailableLetters(lettersGuessed):
     returns: string, comprised of letters that represents what letters have not
       yet been guessed.
     '''
-    # FILL IN YOUR CODE HERE...
-    
+    letters = 'abcdefghijklmnopqrstuvwxyz'
+    if len(lettersGuessed) == 0:
+        return letters
+    else:
+        available_letters = ''
+        for c in letters:
+            if c not in lettersGuessed:
+                available_letters += c
+    return available_letters                
+
+
+def verifyGuessedLetter(guess_letter, lettersGuessed, secretWord):    
+    '''
+    guess_letter - string, letter guessed by player
+    lettersGuessed - list, list of letters guessed by player till now
+    secretWord - string, secret word the player has to guess
+
+    returns: boolean (True is guess is correct | False if guess is incorrect)
+    '''
+    if guess_letter in lettersGuessed:
+        current_word = getGuessedWord(secretWord, lettersGuessed)
+        print "Oops! You've already guessed that letter: {cur_word}".format(cur_word = current_word) 
+        return True
+    else:
+        lettersGuessed.append(guess_letter)
+        current_word = getGuessedWord(secretWord, lettersGuessed)
+        if guess_letter in secretWord: 
+            print "Good Guess: {cur_word}".format(cur_word = current_word)
+            return True
+        else:
+            print "Oops! That letter is not in my word: {cur_word}".format(cur_word = current_word)
+            return False
 
 def hangman(secretWord):
     '''
@@ -97,16 +137,40 @@ def hangman(secretWord):
 
     Follows the other limitations detailed in the problem write-up.
     '''
-    # FILL IN YOUR CODE HERE...
-
-
-
-
+    global lettersGuessed
+    lettersGuessed = []
+    count = 8
+    while count > 0:
+        print 'You have {guess_count} guesses left.'.format(guess_count = count)
+        print 'Available letters: {letters}'.format(letters = getAvailableLetters(lettersGuessed)) 
+        guess_letter = raw_input('Please guess a letter: ')
+        if verifyGuessedLetter(guess_letter, lettersGuessed, secretWord):
+            if isWordGuessed(secretWord, lettersGuessed):
+                print '------------'        
+                print 'Congratulations, you won!'
+                break
+        elif count == 1:
+            print '------------'        
+            print 'Sorry, you ran out of guesses. The word was {secretWord}.'.format(secretWord = secretWord)
+            break
+        else:
+            count -= 1
+        print '------------'        
 
 
 # When you've completed your hangman function, uncomment these two lines
 # and run this file to test! (hint: you might want to pick your own
 # secretWord while you're testing)
 
-# secretWord = chooseWord(wordlist).lower()
-# hangman(secretWord)
+# Load the list of words into the variable wordlist
+# so that it can be accessed from anywhere in the program
+wordlist = loadWords()
+print 'Welcome to the game, Hangman!'
+secretWord = chooseWord(wordlist).lower()
+print 'I am thinking of a word that is {wordlen} letters long.'.format(wordlen = len(secretWord))
+print '------------ ' + str(secretWord)
+hangman(secretWord)
+
+
+
+
