@@ -53,12 +53,12 @@ def isWordGuessed(secretWord, lettersGuessed):
     temp = list("".join(set(secretWord)))
     wordlen = len(temp)
     count = 0 
-    for letter in lettersGuessed:
+    for letter in "".join(set(lettersGuessed)):
         if letter in temp:
             count += 1
     if count == wordlen:
         return True
-    return False            
+    return False 
 
 
 
@@ -136,14 +136,17 @@ def hangman(secretWord):
       user has not yet guessed.
 
     Follows the other limitations detailed in the problem write-up.
-    '''
+    '''    
+    print 'Welcome to the game, Hangman!'
+    print 'I am thinking of a word that is {wordlen} letters long'.format(wordlen = len(secretWord))
+    print '------------ '
     global lettersGuessed
     lettersGuessed = []
     count = 8
     while count > 0:
-        print 'You have {guess_count} guesses left.'.format(guess_count = count)
+        print 'You have {guess_count} guesses left'.format(guess_count = count)
         print 'Available letters: {letters}'.format(letters = getAvailableLetters(lettersGuessed)) 
-        guess_letter = raw_input('Please guess a letter: ')
+        guess_letter = raw_input('Please guess a letter: ').lower()
         if verifyGuessedLetter(guess_letter, lettersGuessed, secretWord):
             if isWordGuessed(secretWord, lettersGuessed):
                 print '------------'        
@@ -165,10 +168,7 @@ def hangman(secretWord):
 # Load the list of words into the variable wordlist
 # so that it can be accessed from anywhere in the program
 wordlist = loadWords()
-print 'Welcome to the game, Hangman!'
 secretWord = chooseWord(wordlist).lower()
-print 'I am thinking of a word that is {wordlen} letters long.'.format(wordlen = len(secretWord))
-print '------------ ' + str(secretWord)
 hangman(secretWord)
 
 
