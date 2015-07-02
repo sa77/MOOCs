@@ -1,4 +1,5 @@
-### MITx: 6.00.1x Introduction to computer science and programming using python
+### MITx: 6.00.1x 
+#### Introduction to computer science and programming using python
 Solutions to MITx:6.00.1x
 
 ##### PSET1
@@ -10,5 +11,9 @@ Solutions to MITx:6.00.1x
   * P1: Credit debt: minimum payment/remaining balance
   * P2: Credit debt: paying debt in a year 
   * P3: Credit debt: paying debt (bisection search)
+
+##### PSET3
+  * Radiation Exposure: radiationExposure function by approximation
+  * Hangman: hangman game implementation  
   
 
