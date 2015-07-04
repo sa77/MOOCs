@@ -15,6 +15,9 @@
     #project1{
       float: left;
     }
+    #project2{
+      float: right;
+    }
     h1{ 
       text-align: center;
     }
@@ -29,19 +32,38 @@
     <section>
       <article id='project1'>
         <h2>simple graphics using basic shapes</h2>
-        <canvas id='myCanvas' width='400' height='200'>
+        <canvas id='myCanvas1' width='400' height='200'>
           Unfortunately, Canvas is not supported by your browser
         </canvas>
       </article>
+
+      <article id='project2'>
+        <h2>Histogram</h2>
+        <canvas id='myCanvas2' width='500' height='300'>
+          Unfortunately, Canvas is not supported by your browser
+        </canvas>
+      </article>      
 
     </section>
   </main>
 
   <script>
   function init(){
-    canvas = document.querySelector('#myCanvas');
+    drawOnCanvas('#myCanvas1');    
+    drawOnCanvas('#myCanvas2');
+  }
+
+  function drawOnCanvas(canvasID){
+    canvas_number = canvasID.slice(-1);
+    canvas = document.querySelector(canvasID);
     ctx = canvas.getContext('2d');
-    drawCar('red');
+    switch(parseInt(canvas_number)){
+      case 1: drawCar('red'); break;
+      case 2: 
+        var data = [1, 12, 20, 14, 13, 9, 5, 3, 8];
+        drawHistogram(data); break;
+      default: break;
+    }
   }
 
   function drawCar(color){
@@ -74,6 +96,22 @@
     //caption
     ctx.font = 'italic 12pt calibri';
     ctx.fillText('Car', 60, 120);
+    ctx.restore();
+  }
+
+  function drawHistogram(data){
+    ctx.save()
+    color = ['green', 'blue', 'red', 'grey', 'orange', 'black'];
+    var positionX = 20;
+    var randomColor = '';
+    data.forEach(function(num) {
+      randomColor = color[Math.floor(Math.random() * color.length)];
+      ctx.fillStyle = randomColor;
+      positionX += 40;
+      ctx.fillRect(positionX, 230, 20, -10*num);
+      ctx.fillStyle = 'black';
+      ctx.fillText(num, positionX + 10, 250);
+    });
     ctx.restore();
   }
   </script>
