@@ -181,7 +181,19 @@ def isValidWord(word, hand, wordList):
     hand: dictionary (string -> int)
     wordList: list of lowercase strings
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    if word.lower() in wordList: 
+        hand_copy = hand.copy()
+        temp_word_size = 0
+        for c in word:
+            c_count = word.count(c)
+            char_hand_count = hand_copy.get(c, 0)        
+            if char_hand_count >= c_count and char_hand_count != 0:            
+                hand_copy[c] = char_hand_count - c_count 
+                temp_word_size += c_count 
+        return True if temp_word_size == len(word) else False
+    else:
+        return False        
+
 
 
 #
@@ -272,10 +284,10 @@ def playGame(wordList):
     hand = dealHand(HAND_SIZE);
     displayHand(hand);
     play_word = raw_input('Enter word, or a \".\" to indicate that you are finished: ')
-    updateHand(hand, play_word)
-
+    new_hand = updateHand(hand, play_word)
+    print isValidWord(play_word, hand, wordList)
     print "\n\nplayGame not yet implemented." # <-- Remove this line when you code the function
-   
+    
 
 
 
