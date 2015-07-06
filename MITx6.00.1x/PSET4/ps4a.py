@@ -7,6 +7,9 @@
 
 import random
 import string
+import os
+
+os.system('clear')
 
 VOWELS = 'aeiou'
 CONSONANTS = 'bcdfghjklmnpqrstvwxyz'
@@ -99,6 +102,7 @@ def displayHand(hand):
 
     hand: dictionary (string -> int)
     """
+    print "Current Hand:",
     for letter in hand.keys():
         for j in range(hand[letter]):
              print letter,              # print all on the same line
@@ -150,8 +154,16 @@ def updateHand(hand, word):
     word: string
     hand: dictionary (string -> int)    
     returns: dictionary (string -> int)
-    """
-    # TO DO ... <-- Remove this comment when you code this function
+    """    
+    count = 0
+    new_hand = hand.copy()
+    word_length = len(word)
+    for c in word:        
+        char_hand_count = new_hand.get(c, 0)        
+        if char_hand_count != 0 and count <= word_length:
+            count += 1            
+            new_hand[c] = char_hand_count - 1    
+    return new_hand
 
 
 
@@ -255,8 +267,13 @@ def playGame(wordList):
  
     2) When done playing the hand, repeat from step 1    
     """
-    word = 'hellooo'
-    print getWordScore(word, HAND_SIZE);
+    #word = 'hello'
+    #print getWordScore(word, HAND_SIZE);
+    hand = dealHand(HAND_SIZE);
+    displayHand(hand);
+    play_word = raw_input('Enter word, or a \".\" to indicate that you are finished: ')
+    updateHand(hand, play_word)
+
     print "\n\nplayGame not yet implemented." # <-- Remove this line when you code the function
    
 
