@@ -75,8 +75,12 @@ def getWordScore(word, n):
     word: string (lowercase letters)
     n: integer (HAND_SIZE; i.e., hand size required for additional points)
     returns: int >= 0
-    """
-    # TO DO ... <-- Remove this comment when you code this function
+    """    
+    score = 0
+    word_size = len(word);
+    for c in word.lower():
+        score += SCRABBLE_LETTER_VALUES[c]        
+    return (score * word_size + 50) if word_size == n else (score * word_size)
 
 
 
@@ -251,8 +255,9 @@ def playGame(wordList):
  
     2) When done playing the hand, repeat from step 1    
     """
-    # TO DO ... <-- Remove this comment when you code this function
-    print "playGame not yet implemented." # <-- Remove this line when you code the function
+    word = 'hellooo'
+    print getWordScore(word, HAND_SIZE);
+    print "\n\nplayGame not yet implemented." # <-- Remove this line when you code the function
    
 
 
