@@ -269,7 +269,7 @@ def playHand(hand, wordList, n):
                 print 'Invalid word, please try again.'
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
     if play_word == '.':
-        print 'Goodbye! Total score: {total_score} points.'.format(**locals())
+        print 'Goodbye! Total score: {total_score} points.\n'.format(**locals())
     else:        
         print '\nRun out of letters. Total score: {total_score} points.'.format(**locals())                                                
 
@@ -289,12 +289,26 @@ def playGame(wordList):
  
     2) When done playing the hand, repeat from step 1    
     """    
-    hand = dealHand(HAND_SIZE)        
-    #playHand(hand, wordList, HAND_SIZE)
+    #playHand({'a': 2, 'p': 1, 'r': 1, 'e': 2, 't': 1}, wordList, 7)
     #playHand({'h':1, 'i':1, 'c':1, 'z':1, 'm':2, 'a':1}, wordList, 7)
-    playHand({'a': 2, 'p': 1, 'r': 1, 'e': 2, 't': 1}, wordList, 7)
+    user_input = ''
+    hand_cache = {}
+    while user_input != 'e':
+        user_input = raw_input('Enter n to deal a new hand, r to replay the last hand, or e to end game: ').lower()
+        if user_input == 'n':
+            hand = dealHand(HAND_SIZE)        
+            hand_cache = hand.copy()
+            playHand(hand, wordList, HAND_SIZE)
+        elif user_input == 'r':
+            if hand_cache == {}:
+                print 'You have not played a hand yet. Please play a new hand first!' 
+            else:
+                playHand(hand_cache, wordList, HAND_SIZE)
+        elif user_input == 'e':
+            break
+        else:
+            print 'Invalid command.'            
     
-
 
 #
 # Build data structures used for entire session and play game
