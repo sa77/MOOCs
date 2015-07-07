@@ -135,10 +135,34 @@ def playGame(wordList):
 
     wordList: list (string)
     """
-    n=12
-    hand = {'a': 2, 'e': 2, 'i': 2, 'm': 2, 'n': 2, 't': 2}
-    compPlayHand(hand, wordList, n)
-    #print compChooseWord(hand, wordList, n)    
+    n = HAND_SIZE    
+    hand_cache = {}
+
+    while 1:
+        game_type = raw_input('\nEnter n to deal a new hand, r to replay the last hand, or e to end game: ').lower()
+        if game_type in 'nr':            
+            if hand_cache == {} and game_type == 'r':
+                print 'You have not played a hand yet. Please play a new hand first!' 
+            else:                
+                while 1:
+                    game_mode = raw_input('\nEnter u to have yourself play, c to have the computer play: ').lower()                    
+                    if game_mode in 'uc': 
+                        if game_type == 'n':
+                            hand = dealHand(n)
+                            hand_cache = hand.copy()                
+                        else:
+                            hand = hand_cache                            
+                        if game_mode == 'u':
+                            playHand(hand, wordList, n)
+                        elif game_mode == 'c': 
+                            compPlayHand(hand, wordList, n)
+                        break                            
+                    else:
+                        print 'Invalid command.'
+        elif game_type == 'e':
+            break
+        else:
+            print 'Invalid command.'                                
     
 
         
