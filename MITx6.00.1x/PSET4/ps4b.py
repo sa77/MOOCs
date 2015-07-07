@@ -17,8 +17,9 @@ def isLettersOfWordInHand(word, hand):
         return False
     for c in hand:
         clen_hand = hand.get(c, 0)
-        if word.count(c, 0) == clen_hand:
-            count += clen_hand
+        clen_word = word.count(c, 0)
+        if clen_word in range(1, clen_hand + 1):
+            count += clen_word            
         if count == word_len:
             return True                        
     return False
@@ -57,12 +58,12 @@ def compChooseWord(hand, wordList, n):
         # If you can construct the word from your hand
         if isLettersOfWordInHand(word, hand):
             # Find out how much making that word is worth
-            word_score = getWordScore(word, n)   
+            word_score = getWordScore(word, n)            
             # If the score for that word is higher than your best score
             if word_score > total_score:
                 # Update your best score, and best word accordingly
                 total_score = word_score
-                best_word = word                            
+                best_word = word              
     # return the best word you found.
     return best_word                
 
@@ -120,7 +121,7 @@ def playGame(wordList):
     wordList: list (string)
     """
     n=6
-    hand = {'a': 1, 'p': 2, 's': 1, 'e': 1, 'l': 1}
+    hand = {'a': 1, 'd': 2, 'i': 2, 'k': 1, 'o': 1, 'n': 1}
     print compChooseWord(hand, wordList, n)    
     print "playGame not yet implemented." # <-- Remove this when you code this function
 
