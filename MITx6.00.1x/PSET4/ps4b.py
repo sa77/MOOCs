@@ -1,6 +1,29 @@
 from ps4a import *
 import time
 
+# ------- HELPER functions start ----------
+
+def isLettersOfWordInHand(word, hand):    
+    '''
+    hand - dictionary (string, int)
+    word - string
+
+    returns - True if word can be constructed using letters from hand
+            - False if word cannot be constructed from hand
+    '''
+    word_len = len(word)
+    count = 0
+    if word_len == 0:
+        return False
+    for c in hand:
+        clen_hand = hand.get(c, 0)
+        if word.count(c, 0) == clen_hand:
+            count += clen_hand
+        if count == word_len:
+            return True                        
+    return False
+
+# ------- HELPER functions end ----------
 
 #
 #
@@ -23,24 +46,25 @@ def compChooseWord(hand, wordList, n):
 
     returns: string or None
     """
-    # BEGIN PSEUDOCODE <-- Remove this comment when you code this function; do your coding within the pseudocode (leaving those comments in-place!)
     # Create a new variable to store the maximum score seen so far (initially 0)
+    total_score = 0
 
     # Create a new variable to store the best word seen so far (initially None)  
+    best_word = None    
 
     # For each word in the wordList
-
+    for word in wordList:
         # If you can construct the word from your hand
-        # (hint: you can use isValidWord, or - since you don't really need to test if the word is in the wordList - you can make a similar function that omits that test)
-
+        if isLettersOfWordInHand(word, hand):
             # Find out how much making that word is worth
-
+            word_score = getWordScore(word, n)   
             # If the score for that word is higher than your best score
-
+            if word_score > total_score:
                 # Update your best score, and best word accordingly
-
-
+                total_score = word_score
+                best_word = word                            
     # return the best word you found.
+    return best_word                
 
 
 #
@@ -95,7 +119,9 @@ def playGame(wordList):
 
     wordList: list (string)
     """
-    # TO DO... <-- Remove this comment when you code this function
+    n=6
+    hand = {'a': 1, 'p': 2, 's': 1, 'e': 1, 'l': 1}
+    print compChooseWord(hand, wordList, n)    
     print "playGame not yet implemented." # <-- Remove this when you code this function
 
         
