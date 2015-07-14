@@ -16,4 +16,6 @@ Solutions to MITx:6.00.1x
   * Radiation Exposure: radiationExposure function by approximation
   * Hangman: hangman game implementation  
   
+##### PSET4
+  * Word Game Implementation
 
