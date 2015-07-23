@@ -99,69 +99,82 @@ def buildCoder(shift):
     shift: 0 <= int < 26
     returns: dict
     """
-    ### TODO.
-    return "Not yet implemented." # Remove this comment when you code the function
+    assert 0 <= shift < 26 and type(shift) == int
+    coder = {}
+    def buildDict(alphabets):        
+        for upper_char in alphabets:
+            char_index = alphabets.index(upper_char) + shift
+            if (char_index + shift) < 26:
+                coder[upper_char] = alphabets[char_index]
+            else:
+                coder[upper_char] = alphabets[char_index - 26]            
+    buildDict(string.ascii_uppercase)
+    buildDict(string.ascii_lowercase)
+    return coder
 
-def applyCoder(text, coder):
-    """
-    Applies the coder to the text. Returns the encoded text.
 
-    text: string
-    coder: dict with mappings of characters to shifted characters
-    returns: text after mapping coder chars to original text
-    """
-    ### TODO.
-    return "Not yet implemented." # Remove this comment when you code the function
+print buildCoder(3)
 
-def applyShift(text, shift):
-    """
-    Given a text, returns a new text Caesar shifted by the given shift
-    offset. Lower case letters should remain lower case, upper case
-    letters should remain upper case, and all other punctuation should
-    stay as it is.
+# def applyCoder(text, coder):
+#     """
+#     Applies the coder to the text. Returns the encoded text.
 
-    text: string to apply the shift to
-    shift: amount to shift the text (0 <= int < 26)
-    returns: text after being shifted by specified amount.
-    """
-    ### TODO.
-    ### HINT: This is a wrapper function.
-    return "Not yet implemented." # Remove this comment when you code the function
+#     text: string
+#     coder: dict with mappings of characters to shifted characters
+#     returns: text after mapping coder chars to original text
+#     """
+#     ### TODO.
+#     return "Not yet implemented." # Remove this comment when you code the function
 
-#
-# Problem 2: Decryption
-#
-def findBestShift(wordList, text):
-    """
-    Finds a shift key that can decrypt the encoded text.
+# def applyShift(text, shift):
+#     """
+#     Given a text, returns a new text Caesar shifted by the given shift
+#     offset. Lower case letters should remain lower case, upper case
+#     letters should remain upper case, and all other punctuation should
+#     stay as it is.
 
-    text: string
-    returns: 0 <= int < 26
-    """
-    ### TODO
-    return "Not yet implemented." # Remove this comment when you code the function
+#     text: string to apply the shift to
+#     shift: amount to shift the text (0 <= int < 26)
+#     returns: text after being shifted by specified amount.
+#     """
+#     ### TODO.
+#     ### HINT: This is a wrapper function.
+#     return "Not yet implemented." # Remove this comment when you code the function
 
-def decryptStory():
-    """
-    Using the methods you created in this problem set,
-    decrypt the story given by the function getStoryString().
-    Use the functions getStoryString and loadWords to get the
-    raw data you need.
+# #
+# # Problem 2: Decryption
+# #
+# def findBestShift(wordList, text):
+#     """
+#     Finds a shift key that can decrypt the encoded text.
 
-    returns: string - story in plain text
-    """
-    ### TODO.
-    return "Not yet implemented." # Remove this comment when you code the function
+#     text: string
+#     returns: 0 <= int < 26
+#     """
+#     ### TODO
+#     return "Not yet implemented." # Remove this comment when you code the function
 
-#
-# Build data structures used for entire session and run encryption
-#
+# def decryptStory():
+#     """
+#     Using the methods you created in this problem set,
+#     decrypt the story given by the function getStoryString().
+#     Use the functions getStoryString and loadWords to get the
+#     raw data you need.
 
-if __name__ == '__main__':
-    # To test findBestShift:
-    wordList = loadWords()
-    s = applyShift('Hello, world!', 8)
-    bestShift = findBestShift(wordList, s)
-    assert applyShift(s, bestShift) == 'Hello, world!'
-    # To test decryptStory, comment the above four lines and uncomment this line:
-    #    decryptStory()
+#     returns: string - story in plain text
+#     """
+#     ### TODO.
+#     return "Not yet implemented." # Remove this comment when you code the function
+
+# #
+# # Build data structures used for entire session and run encryption
+# #
+
+# if __name__ == '__main__':
+#     # To test findBestShift:
+#     wordList = loadWords()
+#     s = applyShift('Hello, world!', 8)
+#     bestShift = findBestShift(wordList, s)
+#     assert applyShift(s, bestShift) == 'Hello, world!'
+#     # To test decryptStory, comment the above four lines and uncomment this line:
+#     #    decryptStory()
