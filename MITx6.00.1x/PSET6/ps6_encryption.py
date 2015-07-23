@@ -129,24 +129,23 @@ def applyCoder(text, coder):
             coded_text += char            
     return coded_text            
 
+
+def applyShift(text, shift):
+    """
+    Given a text, returns a new text Caesar shifted by the given shift
+    offset. Lower case letters should remain lower case, upper case
+    letters should remain upper case, and all other punctuation should
+    stay as it is.
+
+    text: string to apply the shift to
+    shift: amount to shift the text (0 <= int < 26)
+    returns: text after being shifted by specified amount.
+    """
+    return applyCoder(text, buildCoder(shift))
+    
+
 text = 'Hello, world!'
-coder = buildCoder(3)
-print applyCoder(text, coder)
-
-# def applyShift(text, shift):
-#     """
-#     Given a text, returns a new text Caesar shifted by the given shift
-#     offset. Lower case letters should remain lower case, upper case
-#     letters should remain upper case, and all other punctuation should
-#     stay as it is.
-
-#     text: string to apply the shift to
-#     shift: amount to shift the text (0 <= int < 26)
-#     returns: text after being shifted by specified amount.
-#     """
-#     ### TODO.
-#     ### HINT: This is a wrapper function.
-#     return "Not yet implemented." # Remove this comment when you code the function
+print applyShift(text, 3)
 
 # #
 # # Problem 2: Decryption
