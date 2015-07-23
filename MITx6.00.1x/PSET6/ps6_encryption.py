@@ -113,18 +113,25 @@ def buildCoder(shift):
     return coder
 
 
-print buildCoder(3)
+def applyCoder(text, coder):
+    """
+    Applies the coder to the text. Returns the encoded text.
 
-# def applyCoder(text, coder):
-#     """
-#     Applies the coder to the text. Returns the encoded text.
+    text: string
+    coder: dict with mappings of characters to shifted characters
+    returns: text after mapping coder chars to original text
+    """
+    coded_text = ''
+    for char in text:
+        if coder.get(char, None):
+            coded_text += coder[char]
+        else:
+            coded_text += char            
+    return coded_text            
 
-#     text: string
-#     coder: dict with mappings of characters to shifted characters
-#     returns: text after mapping coder chars to original text
-#     """
-#     ### TODO.
-#     return "Not yet implemented." # Remove this comment when you code the function
+text = 'Hello, world!'
+coder = buildCoder(3)
+print applyCoder(text, coder)
 
 # def applyShift(text, shift):
 #     """
