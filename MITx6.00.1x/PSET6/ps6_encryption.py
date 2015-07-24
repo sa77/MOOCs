@@ -144,21 +144,31 @@ def applyShift(text, shift):
     return applyCoder(text, buildCoder(shift))
     
 
-text = 'Hello, world!'
-print applyShift(text, 3)
 
-# #
-# # Problem 2: Decryption
-# #
-# def findBestShift(wordList, text):
-#     """
-#     Finds a shift key that can decrypt the encoded text.
+#
+# Problem 2: Decryption
+#
+def findBestShift(wordList, text):
+    """
+    Finds a shift key that can decrypt the encoded text.
 
-#     text: string
-#     returns: 0 <= int < 26
-#     """
-#     ### TODO
-#     return "Not yet implemented." # Remove this comment when you code the function
+    text: string
+    returns: 0 <= int < 26
+    """
+    max_word_count = 0 
+    best_shift = 0
+    for i in range(0, 26):
+        word_count = 0
+        for word in text.split(' '):
+            temp = applyShift(word, i)
+            if isWord(wordList, temp):
+                word_count += 1
+            if word_count > max_word_count:
+                max_word_count = word_count
+                best_shift = i
+    return best_shift                        
+
+
 
 # def decryptStory():
 #     """
@@ -176,11 +186,14 @@ print applyShift(text, 3)
 # # Build data structures used for entire session and run encryption
 # #
 
-# if __name__ == '__main__':
-#     # To test findBestShift:
-#     wordList = loadWords()
-#     s = applyShift('Hello, world!', 8)
-#     bestShift = findBestShift(wordList, s)
-#     assert applyShift(s, bestShift) == 'Hello, world!'
-#     # To test decryptStory, comment the above four lines and uncomment this line:
-#     #    decryptStory()
+if __name__ == '__main__':
+    # To test findBestShift:
+    wordList = loadWords()    
+    s = applyShift('Hello, world!', 11)    
+    bestShift = findBestShift(wordList, s)
+    print bestShift 
+    print applyShift(s, bestShift)
+    assert applyShift(s, bestShift) == 'Hello, world!'
+    # To test decryptStory, comment the above four lines and uncomment this line:
+    #    decryptStory()
+
