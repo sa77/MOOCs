@@ -169,31 +169,34 @@ def findBestShift(wordList, text):
     return best_shift                        
 
 
+def decryptStory():
+    """
+    Using the methods you created in this problem set,
+    decrypt the story given by the function getStoryString().
+    Use the functions getStoryString and loadWords to get the
+    raw data you need.
 
-# def decryptStory():
-#     """
-#     Using the methods you created in this problem set,
-#     decrypt the story given by the function getStoryString().
-#     Use the functions getStoryString and loadWords to get the
-#     raw data you need.
+    returns: string - story in plain text
+    """
+    wordList = loadWords()
+    encrypted_story = getStoryString()    
+    best_shift = findBestShift(wordList, encrypted_story)
+    return applyShift(encrypted_story, best_shift)
 
-#     returns: string - story in plain text
-#     """
-#     ### TODO.
-#     return "Not yet implemented." # Remove this comment when you code the function
 
-# #
-# # Build data structures used for entire session and run encryption
-# #
-
+#
+# Build data structures used for entire session and run encryption
+#
 if __name__ == '__main__':
     # To test findBestShift:
-    wordList = loadWords()    
-    s = applyShift('Hello, world!', 11)    
-    bestShift = findBestShift(wordList, s)
-    print bestShift 
-    print applyShift(s, bestShift)
-    assert applyShift(s, bestShift) == 'Hello, world!'
+    # wordList = loadWords()    
+    # s = applyShift('Hello, world!', 11)    
+    # bestShift = findBestShift(wordList, s)
+    # print bestShift 
+    # print applyShift(s, bestShift)
+    # assert applyShift(s, bestShift) == 'Hello, world!'
     # To test decryptStory, comment the above four lines and uncomment this line:
-    #    decryptStory()
+    decrypted_story = decryptStory()
+    print decrypted_story
+
 
