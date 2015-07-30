@@ -19,3 +19,5 @@ Solutions to MITx:6.00.1x
 ##### PSET4
   * Word Game Implementation
 
+##### PSET6
+  * Caesar cipher - encryption/decryption
