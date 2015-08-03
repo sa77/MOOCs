@@ -46,7 +46,29 @@ def process(url):
 
 # Problem 1
 
-# TODO: NewsStory
+class NewsStory(object):
+    def __init__(self, guid, title, subject, summary, link):
+        self.guid = guid
+        self.title = title
+        self.subject = subject
+        self.summary = summary
+        self.link = link
+    
+    def getGuid(self):
+        return self.guid
+
+    def getTitle(self):
+        return self.title
+
+    def getSubject(self):
+        return self.subject
+
+    def getSummary(self):
+        return self.summary
+
+    def getLink(self):
+        return self.link
+        
 
 #======================
 # Part 2
@@ -93,6 +115,7 @@ class Trigger(object):
 def filterStories(stories, triggerlist):
     """
     Takes in a list of NewsStory instances.
+
 
     Returns: a list of only the stories for which a trigger in triggerlist fires.
     """
