@@ -68,7 +68,7 @@ class NewsStory(object):
 
     def getLink(self):
         return self.link
-        
+
 
 #======================
 # Part 2
@@ -87,10 +87,49 @@ class Trigger(object):
 # Problems 2-5
 
 # TODO: WordTrigger
+class WordTrigger(Trigger):
+    def __init__(self, word):
+        self.word = word.lower()
+
+    def removePunctuation(self, text):
+        punctuation = set(string.punctuation)
+        word_list = []
+        for w in text.lower().split():
+            temp = w
+            for char in w:
+                if char in punctuation:
+                    temp = temp.replace(char, ' ').strip()
+                    # print '>>' + str(temp)
+            word_list.append(temp.split()[0])            
+        return word_list
+
+    def isWordIn(self, text):        
+        word_list = self.removePunctuation(text)        
+        return True if self.word.lower() in word_list else False
 
 # TODO: TitleTrigger
+class TitleTrigger(WordTrigger):
+    def __init__(self, word):
+        WordTrigger.__init__(self, word)
+
+    def evaluate(self, story):        
+        return WordTrigger.isWordIn(self, story.getTitle())
+
 # TODO: SubjectTrigger
+class SubjectTrigger(WordTrigger):
+    def __init__(self, word):
+        WordTrigger.__init__(self, word)
+
+    def evaluate(self, story):        
+        return WordTrigger.isWordIn(self, story.getSubject())        
+
 # TODO: SummaryTrigger
+class SummaryTrigger(WordTrigger):
+    def __init__(self, word):
+        WordTrigger.__init__(self, word)
+
+    def evaluate(self, story):        
+        return WordTrigger.isWordIn(self, story.getSummary())
 
 
 # Composite Triggers
