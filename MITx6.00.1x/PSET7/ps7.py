@@ -188,14 +188,14 @@ def filterStories(stories, triggerlist):
 
     Returns: a list of only the stories for which a trigger in triggerlist fires.
     """
-    # This is a placeholder (we're just returning all the stories, with no filtering) 
-    filtered_stories = []
-    for story in stories:
-        for trigger in triggerlist:
-            if trigger.evaluate(story):
-                filtered_stories.append(story)
-                break
+    # return stories
+    filtered_stories = []    
+    for trigger in triggerlist:        
+        for story in stories:
+            if trigger.evaluate(story) and story not in filtered_stories:
+                filtered_stories.append(story)                
     return filtered_stories
+
 
 #======================
 # Part 4
@@ -217,7 +217,25 @@ def makeTrigger(triggerMap, triggerType, params, name):
 
     Returns a new instance of a trigger (ex: TitleTrigger, AndTrigger).
     """
-    # TODO: Problem 11
+    if triggerType == 'NOT':
+        trigger = NotTrigger(triggerMap.get(params[0]))
+    elif triggerType == 'AND':
+        trigger = AndTrigger(triggerMap.get(params[0]), triggerMap.get(params[1]))
+    elif triggerType == 'OR':
+        trigger = OrTrigger(triggerMap.get(params[0]), triggerMap.get(params[1]))
+    else:                     
+        params_str = ' '.join(params)        
+        switcher = {
+            'TITLE' : TitleTrigger(params_str),
+            'SUBJECT' : SubjectTrigger(params_str),
+            'SUMMARY' : SummaryTrigger(params_str),
+            'PHRASE' : PhraseTrigger(params_str)
+        }    
+        trigger = switcher.get(triggerType)        
+    triggerMap[name] = trigger
+    return trigger
+
+
 
 
 def readTriggerConfig(filename):
@@ -226,7 +244,6 @@ def readTriggerConfig(filename):
     that correspond to the rules set
     in the file filename
     """
-
     # Here's some code that we give you
     # to read in the file and eliminate
     # blank lines and comments
@@ -255,10 +272,10 @@ def readTriggerConfig(filename):
         # Add the triggers to the list
         else:
             for name in linesplit[1:]:
-                triggers.append(triggerMap[name])
-
+                triggers.append(triggerMap[name])                    
     return triggers
     
+
 import thread
 
 SLEEPTIME = 60 #seconds -- how often we poll
@@ -277,7 +294,7 @@ def main_thread(master):
         
         # TODO: Problem 11
         # After implementing makeTrigger, uncomment the line below:
-        # triggerlist = readTriggerConfig("triggers.txt")
+        triggerlist = readTriggerConfig("triggers.txt")
 
         # **** from here down is about drawing ****
         frame = Frame(master)
