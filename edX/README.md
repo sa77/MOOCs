@@ -1,3 +1,3 @@
 # edX
-Solutions to edX online courses
+Solutions to edX MOOCs
   
